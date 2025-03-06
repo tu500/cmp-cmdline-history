@@ -16,7 +16,14 @@ function source:complete(request, callback)
     local item = vim.fn.histget(hist_type, -i)
     if #item > 0 and not seen_items[item] then
       seen_items[item] = true
-      items[#items + 1] = { label = item, dup = 0 }
+      items[#items + 1] = {
+        label = item,
+        dup = 0,
+        cmp = {
+          kind_text = 'History',
+          kind_hl_group = 'CmpItemKindHistory'
+        }
+      }
     end
   end
   callback({ items = items })
